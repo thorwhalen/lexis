@@ -1,4 +1,4 @@
-"""The py2store wrapper to nltk.corpus.wordnet.
+"""The key-value (i.e. dict-list) wrapper to nltk.corpus.wordnet.
 
 Your no fuss gateway to (English) words.
 
@@ -13,10 +13,13 @@ in your terminal, and then in a python console:
 >>> import nltk; nltk.download('wordnet')  # doctest: +SKIP
 ```
 
-If you don't like that way, [see here](https://www.nltk.org/install.html) for other ways to get wordnet.
+If you don't like that way, [see here](https://www.nltk.org/install.html) for other
+ways to get wordnet.
 
-The central construct of this module is the Synset (a set of synonyms that share a common meaning).
-To see a few things you can do with Synsets, naked, [see here](https://www.nltk.org/howto/wordnet.html).
+The central construct of this module is the Synset
+(a set of synonyms that share a common meaning).
+To see a few things you can do with Synsets, naked,
+[see here](https://www.nltk.org/howto/wordnet.html).
 
 Here we put a py2store wrapper around this stuff.
 
@@ -202,7 +205,7 @@ class KvSynset(wordnet_element_store_base(Synset)):
     """A thin layer on top of nltk.corpus.reader.wordnet.Synset that will give us a dict-like interface of it.
 
     Think of "synset" as a "concept".
-    For a list (or rather "dict") of these, checkout ``py2store.ext.wordnet.Synsets``
+    For a list (or rather "dict") of these, checkout ``lexis.Synsets``
 
     >>> ss = KvSynset.from_name('sound.n.01')
     >>> ss
