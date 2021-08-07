@@ -84,7 +84,7 @@ def keyable_attr_names(obj):
 def wordnet_element_store_base(element_cls, __module__=__name__):
     @add_ipython_key_completions
     @cached_keys(keys_cache=keyable_attr_names(element_cls), __module__=__module__)
-    class _WordnetElementStore(Store):
+    class WordnetElement(Store):
         _from_name = None
 
         # def __new__(cls, *args, **kwargs):
@@ -111,12 +111,12 @@ def wordnet_element_store_base(element_cls, __module__=__name__):
         def __repr__(self):
             return f"{self.__class__.__name__}('{self._name}')"
 
-    _WordnetElementStore._from_name = {
+    WordnetElement._from_name = {
         Lemma: wn.lemma,
         Synset: wn.synset,
     }.get(element_cls, None)
 
-    return _WordnetElementStore
+    return WordnetElement
 
 
 # Parsing method from nltk.corpus.reader.wordnet.Lemma's documentation.
