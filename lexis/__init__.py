@@ -46,6 +46,7 @@ If you don't have nltk already, do ``pip install nltk``, and if it's that
 you don't have wordnet downloaded, do ``import nltk; nltk.download('wordnet');``
 '''
 ):
+    import nltk
     from nltk.corpus import wordnet as wn
     from nltk.corpus.reader.wordnet import Synset, Lemma
 
@@ -519,3 +520,86 @@ class HyponymForest(object):
                 [d, dd._df_for_excel_export(method=method, method_args=method_args),]
             )
         d.to_excel(filepath, sheet_name=sheet_name, header=False, index=False)
+
+
+def is_noun(word):
+    """Returns True iff word is a noun.
+
+    Warning
+
+    >>> is_noun('dog')
+    True
+    >>> is_noun('run')
+    False
+    >>> is_noun('dogs')
+    True
+    >>> is_noun('doggy')
+    True
+    >>> is_noun('doggies')
+    True
+
+    But:
+
+    >>> is_noun('eat')  # should be False
+    True
+
+    """
+
+    tagged_word = nltk.pos_tag([word])
+    pos = tagged_word[0][1]
+    return pos == 'NN' or pos == 'NNS'
+
+
+def is_drawable(word):
+    """Returns True if the word is a physical entity that can be drawn.
+
+    >>> is_drawable('dog')
+    True
+    >>> is_drawable('doggies')
+    True
+    >>> is_drawable('happy')
+    False
+    >>> is_drawable('eat')
+    False
+
+    """
+    # Define a set of part-of-speech tags that correspond to physical objects
+    physical_tags = {'NN', 'NNS', 'NNP', 'NNPS', 'JJ', 'JJR', 'JJS', 'VBG'}
+
+    # Get the part of speech tag for the word
+    tagged_word = nltk.pos_tag([word])
+    pos_tag = tagged_word[0][1]
+
+    # Check if the tag is in the set of physical tags
+    if pos_tag in physical_tags:
+        # Check if the word is a real-world object or concept
+        synsets = nltk.corpus.wordnet.synsets(word)
+        for synset in synsets:
+            if synset.pos() == 'n' and not synset.lexname().startswith('verb'):
+                return True
+
+    # Return False if the word is not a physical entity that can be drawn
+    return False
+
+
+def get_singular(word: str) -> str:
+    """Get the singular form of a word using nltk's wordnet
+
+    See Also
+    --------
+
+    :func:`get_singular_w_inflect`, in the `idiom` package, which creates plurals
+    through a different method, (a rule-based approach).
+    Once the data is loaded, the present ``nltk`` is faster than the one made
+    with ``inflect``, but gives less accurate results, since it's idea of singular is
+    "the base concept".
+
+    """
+    from nltk.corpus import wordnet
+
+    singular = word
+    synsets = wordnet.synsets(word, pos='n')
+    if synsets:
+        lemma = synsets[0].lemmas()[0]
+        singular = lemma.name()
+    return singular
