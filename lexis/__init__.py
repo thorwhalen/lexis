@@ -32,7 +32,6 @@ from i2.signatures import Sig
 
 from dol.mixins import ReadOnlyMixin
 from dol.util import ModuleNotFoundErrorNiceMessage
-from dol.sources import Attrs
 from dol import (
     Store,
     KvReader,
@@ -51,20 +50,29 @@ you don't have wordnet downloaded, do ``import nltk; nltk.download('wordnet');``
     from nltk.corpus.reader.wordnet import Synset, Lemma
 
 
+def attr_names_and_vals(obj):
+    yield from ((name, getattr(obj, name)) for name in dir(obj))
+
+
 def callable_attr_names(obj):
     """Set of attributes that are not callable"""
-    return {name for name, a in Attrs(obj).items() if not callable(a.src)}
+    return {name for name, a in attr_names_and_vals(obj) if not callable(a)}
 
 
 def fully_defaulted_method_names(obj):
     """Set of method names whose arguments all have defaults
     (so are callable without arguments)."""
-    return {
-        name
-        for name, a in Attrs(obj).items()
-        if callable(a.src) and len(Sig(a.src)) - len(Sig(a.src).defaults) == 1
-    }
-
+    def _gen():
+        for name, a in attr_names_and_vals(obj):
+            if callable(a):
+                try:
+                    sig = Sig(a)
+                    if len(sig) - len(sig.defaults) == 1:
+                        yield name
+                except (TypeError, ValueError):
+                    pass
+    return set(_gen())
+  
 
 def keyable_attr_names(obj):
     """Set of attribute names of object that can be used as keys
@@ -112,9 +120,10 @@ def wordnet_element_store_base(element_cls, __module__=__name__):
         def __repr__(self):
             return f"{self.__class__.__name__}('{self._name}')"
 
-    WordnetElement._from_name = {Lemma: wn.lemma, Synset: wn.synset,}.get(
-        element_cls, None
-    )
+    WordnetElement._from_name = {
+        Lemma: wn.lemma,
+        Synset: wn.synset,
+    }.get(element_cls, None)
 
     return WordnetElement
 
@@ -198,6 +207,7 @@ synset_methods_returning_list_of_lists_of_synsets = {
     'hypernym_paths',
     'hyponym_paths',
 }
+
 
 # @add_ipython_key_completions
 # @cached_keys(keys_cache=keyable_attr_names(Synset), __module__=__name__)
@@ -517,7 +527,10 @@ class HyponymForest(object):
         d = pd.DataFrame()
         for dd in self.tree_list:
             d = pd.concat(
-                [d, dd._df_for_excel_export(method=method, method_args=method_args),]
+                [
+                    d,
+                    dd._df_for_excel_export(method=method, method_args=method_args),
+                ]
             )
         d.to_excel(filepath, sheet_name=sheet_name, header=False, index=False)
 
