@@ -62,6 +62,7 @@ def callable_attr_names(obj):
 def fully_defaulted_method_names(obj):
     """Set of method names whose arguments all have defaults
     (so are callable without arguments)."""
+
     def _gen():
         for name, a in attr_names_and_vals(obj):
             if callable(a):
@@ -71,8 +72,9 @@ def fully_defaulted_method_names(obj):
                         yield name
                 except (TypeError, ValueError):
                     pass
+
     return set(_gen())
-  
+
 
 def keyable_attr_names(obj):
     """Set of attribute names of object that can be used as keys
@@ -120,10 +122,9 @@ def wordnet_element_store_base(element_cls, __module__=__name__):
         def __repr__(self):
             return f"{self.__class__.__name__}('{self._name}')"
 
-    WordnetElement._from_name = {
-        Lemma: wn.lemma,
-        Synset: wn.synset,
-    }.get(element_cls, None)
+    WordnetElement._from_name = {Lemma: wn.lemma, Synset: wn.synset,}.get(
+        element_cls, None
+    )
 
     return WordnetElement
 
@@ -527,10 +528,7 @@ class HyponymForest(object):
         d = pd.DataFrame()
         for dd in self.tree_list:
             d = pd.concat(
-                [
-                    d,
-                    dd._df_for_excel_export(method=method, method_args=method_args),
-                ]
+                [d, dd._df_for_excel_export(method=method, method_args=method_args),]
             )
         d.to_excel(filepath, sheet_name=sheet_name, header=False, index=False)
 

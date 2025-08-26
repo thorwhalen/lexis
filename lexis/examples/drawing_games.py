@@ -52,6 +52,7 @@ class FakeArtist:
         # that next player.
 
     """
+
     players: Union[int, List[str]] = 3
     max_rank: int = 1000
 
@@ -83,7 +84,5 @@ class FakeArtist:
 
     def next_cycle_item(self):
         if self.view_cycle is None:
-            print(f"You need to deal some cards first (using `deal_new_cards`)")
+            print(f'You need to deal some cards first (using `deal_new_cards`)')
         return next(self.view_cycle)
-
-
