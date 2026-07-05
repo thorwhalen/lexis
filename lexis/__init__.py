@@ -37,6 +37,7 @@ from dol import (
     KvReader,
     cached_keys,
     add_ipython_key_completions,
+    wrapped_self,
 )
 
 with ModuleNotFoundErrorNiceMessage(
@@ -109,8 +110,13 @@ def wordnet_element_store_base(element_cls, __module__=__name__):
             return cls(cls._from_name(name))
 
         def dict_of_non_empty_values(self):
+            # wrapped_self: inside this cached_keys-wrapped class, ``self`` is the inner
+            # unwrapped store whose __iter__ tries to iterate the raw wordnet element (not
+            # iterable); route through the outer store's cached keys (dol Issue #18).
             return {
-                k: v for k, v in self.items() if not isinstance(v, list) or len(v) > 0
+                k: v
+                for k, v in wrapped_self(self).items()
+                if not isinstance(v, list) or len(v) > 0
             }
 
         def __getitem__(self, k):
@@ -377,15 +383,14 @@ def pprint_hypos(syn, tab=''):
             pprint_hypos(hi, tab + '  ')
 
 
-class iTree(object):
+class iTree:
     def __init__(self, value=None):
         self.value = value
         self.children = []
         self.default_node_2_str = lambda node: str(node.value)
 
     def __iter__(self):
-        for v in itertools.chain(*map(iter, self.children)):
-            yield v
+        yield from itertools.chain(*map(iter, self.children))
         yield self
 
     def tree_info_str(
@@ -406,7 +411,7 @@ class HyponymTree(iTree):
     def __init__(self, value=None):
         if isinstance(value, str):
             value = wn.synset(value)
-        super(HyponymTree, self).__init__(value=value)
+        super().__init__(value=value)
         for hypo in value.hyponyms():
             self.children.append(HyponymTree(hypo))
         self.set_default_node_2_str('name')
@@ -511,7 +516,7 @@ class HyponymTree(iTree):
         d.to_excel(filepath, sheet_name=sheet_name, header=False, index=False)
 
 
-class HyponymForest(object):
+class HyponymForest:
     def __init__(self, tree_list):
         assert len(tree_list) == len(set(tree_list)), 'synsets in list must be unique'
         for i, ss in enumerate(tree_list):
