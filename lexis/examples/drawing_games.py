@@ -53,7 +53,7 @@ class FakeArtist:
 
     """
 
-    players: Union[int, List[str]] = 3
+    players: int | list[str] = 3
     max_rank: int = 1000
 
     current_cards = None
