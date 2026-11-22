@@ -77,10 +77,19 @@ def fully_defaulted_method_names(obj):
     return set(_gen())
 
 
+# Newer nltk Synset methods that look callable-without-arguments but need a ``children`` function
+non_key_attr_names = frozenset({"mst", "acyclic_tree"})
+
+
 def keyable_attr_names(obj):
     """Set of attribute names of object that can be used as keys
-    (because not callable, or callable without args)."""
-    return callable_attr_names(obj) | fully_defaulted_method_names(obj)
+    (because not callable, or callable without args). Private and dunder names are left out."""
+    names = callable_attr_names(obj) | fully_defaulted_method_names(obj)
+    return {
+        name
+        for name in names
+        if not name.startswith("_") and name not in non_key_attr_names
+    }
 
 
 # lemma_names_of_non_callable_attrs = callable_attr_names(Lemma)
@@ -94,20 +103,18 @@ def keyable_attr_names(obj):
 
 
 def wordnet_element_store_base(element_cls, __module__=__name__):
+    # Looked up here and attached to the undecorated WordnetElementStore below: attributes
+    # set on, or defined in, the dol-decorated class do not reach its subclasses.
+    _element_from_name = {Lemma: wn.lemma, Synset: wn.synset}.get(element_cls, None)
+
     @add_ipython_key_completions
     @cached_keys(keys_cache=keyable_attr_names(element_cls), __module__=__module__)
     class WordnetElement(Store):
-        _from_name = None
-
         # def __new__(cls, *args, **kwargs):
         #     if len(args) > 0 and isinstance(args[0], str):
         #         return cls.from_name(args[0])
         #     else:
         #         return super().__new__(*args, **kwargs)
-
-        @classmethod
-        def from_name(cls, name):
-            return cls(cls._from_name(name))
 
         def dict_of_non_empty_values(self):
             # wrapped_self: inside this cached_keys-wrapped class, ``self`` is the inner
@@ -126,13 +133,18 @@ def wordnet_element_store_base(element_cls, __module__=__name__):
             return attr
 
         def __repr__(self):
-            return f"{self.__class__.__name__}('{self._name}')"
+            return f"{type(wrapped_self(self)).__name__}('{self._name}')"
 
-    WordnetElement._from_name = {Lemma: wn.lemma, Synset: wn.synset,}.get(
-        element_cls, None
-    )
+    class WordnetElementStore(WordnetElement):
+        # Not defined in WordnetElement itself: there the dol class decorators bind ``cls``
+        # to the inner, unwrapped class, so instances would lose the subclass's name.
+        _from_name = staticmethod(_element_from_name) if _element_from_name else None
 
-    return WordnetElement
+        @classmethod
+        def from_name(cls, name):
+            return cls(cls._from_name(name))
+
+    return WordnetElementStore
 
 
 # Parsing method from nltk.corpus.reader.wordnet.Lemma's documentation.
@@ -235,12 +247,16 @@ class KvSynset(wordnet_element_store_base(Synset)):
 
     So let's list it's keys:
 
-    >>> print(*sorted(ss)) #doctest: +NORMALIZE_WHITESPACE
-    also_sees attributes causes definition entailments examples frame_ids hypernym_distances hypernym_paths hypernyms
-    hyponyms in_region_domains in_topic_domains in_usage_domains instance_hypernyms instance_hyponyms lemma_names
-    lemmas lexname max_depth member_holonyms member_meronyms min_depth name offset part_holonyms part_meronyms pos
-    region_domains root_hypernyms similar_tos substance_holonyms substance_meronyms topic_domains usage_domains
-    verb_groups
+    >>> keys = set(ss)
+    >>> expected_keys = set((
+    ...     'also_sees attributes causes definition entailments examples '
+    ...     'frame_ids hypernym_distances hypernym_paths hypernyms hyponyms in_region_domains '
+    ...     'in_topic_domains in_usage_domains instance_hypernyms instance_hyponyms lemma_names '
+    ...     'lemmas lexname max_depth member_holonyms member_meronyms min_depth name offset '
+    ...     'part_holonyms part_meronyms pos region_domains root_hypernyms similar_tos '
+    ...     'substance_holonyms substance_meronyms topic_domains usage_domains verb_groups'
+    ... ).split())
+    >>> assert expected_keys <= keys  # newer nltk versions add a few more (e.g. mst)
 
     So lots of info about that concept.
 
