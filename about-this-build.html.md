@@ -2,7 +2,7 @@
 
 # About this build
 
-This documentation was built on **2026-11-22 19:35 UTC** from commit <a href="https://github.com/thorwhalen/lexis/commit/62ae5806f7fb3a673f1c703a287c04712bb54f9c"><code>62ae580</code></a> on branch <code>master</code>, for **lexis 0.1.5** (from <code>pyproject.toml</code>).
+This documentation was built on **2026-11-22 21:48 UTC** from commit <a href="https://github.com/thorwhalen/lexis/commit/734def60838a357f620947635740d197624cb331"><code>734def6</code></a> on branch <code>master</code>, for **lexis 0.1.5** (from <code>pyproject.toml</code>).
 
 #### NOTE
 Nothing suggests a mismatch: the tree was clean at the commit above, and the documented version is the one on PyPI.
@@ -11,7 +11,7 @@ Nothing suggests a mismatch: the tree was clean at the commit above, and the doc
 
 |                     |                                                                                                                                                         |
 |---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Commit              | <a href="https://github.com/thorwhalen/lexis/commit/62ae5806f7fb3a673f1c703a287c04712bb54f9c"><code>62ae5806f7fb3a673f1c703a287c04712bb54f9c</code></a> |
+| Commit              | <a href="https://github.com/thorwhalen/lexis/commit/734def60838a357f620947635740d197624cb331"><code>734def60838a357f620947635740d197624cb331</code></a> |
 | Branch              | <code>master</code>                                                                                                                                     |
 | Tags at this commit | none                                                                                                                                                    |
 | Working tree        | clean                                                                                                                                                   |
@@ -22,9 +22,9 @@ Nothing suggests a mismatch: the tree was clean at the commit above, and the doc
 |              |                                                                                            |
 |--------------|--------------------------------------------------------------------------------------------|
 | Repository   | <code>thorwhalen/lexis</code>                                                              |
-| Run          | <a href="https://github.com/thorwhalen/lexis/actions/runs/45061407754">45061407754</a>     |
+| Run          | <a href="https://github.com/thorwhalen/lexis/actions/runs/45074013013">45074013013</a>     |
 | Ref          | <code>refs/heads/master</code>                                                             |
-| Event commit | <code>62ae5806f7fb3a673f1c703a287c04712bb54f9c</code> (in the history of the built commit) |
+| Event commit | <code>734def60838a357f620947635740d197624cb331</code> (in the history of the built commit) |
 
 ## Tools
 
@@ -55,7 +55,7 @@ Latest release: <a href="https://pypi.org/project/lexis/0.1.5/">0.1.5</a>, the s
 
 ```bash
 git clone https://github.com/thorwhalen/lexis && cd lexis
-git checkout 62ae5806f7fb3a673f1c703a287c04712bb54f9c
+git checkout 734def60838a357f620947635740d197624cb331
 pip install "epythet==0.2.23"
 epythet quickstart . --ignore tests/ scrap/ examples/
 ```

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "built_at": "2026-11-22T19:35:30Z",
+  "built_at": "2026-11-22T21:48:49Z",
   "package": {
     "name": "lexis",
     "version": "0.1.5",
@@ -9,24 +9,24 @@
   },
   "git": {
     "available": true,
-    "commit": "62ae5806f7fb3a673f1c703a287c04712bb54f9c",
-    "short_commit": "62ae580",
+    "commit": "734def60838a357f620947635740d197624cb331",
+    "short_commit": "734def6",
     "branch": "master",
     "tags": [],
     "dirty": false,
     "remote_url": "https://github.com/thorwhalen/lexis",
-    "commit_url": "https://github.com/thorwhalen/lexis/commit/62ae5806f7fb3a673f1c703a287c04712bb54f9c",
+    "commit_url": "https://github.com/thorwhalen/lexis/commit/734def60838a357f620947635740d197624cb331",
     "error": null
   },
   "ci": {
     "provider": "github",
     "repository": "thorwhalen/lexis",
-    "sha": "62ae5806f7fb3a673f1c703a287c04712bb54f9c",
+    "sha": "734def60838a357f620947635740d197624cb331",
     "sha_in_history": true,
     "ref": "refs/heads/master",
     "ref_name": "master",
-    "run_id": "45061407754",
-    "run_url": "https://github.com/thorwhalen/lexis/actions/runs/45061407754",
+    "run_id": "45074013013",
+    "run_url": "https://github.com/thorwhalen/lexis/actions/runs/45074013013",
     "server_url": "https://github.com"
   },
   "tools": {
@@ -64,7 +64,7 @@
     "relation": "same",
     "error": null
   },
-  "reproduce": "git clone https://github.com/thorwhalen/lexis && cd lexis\ngit checkout 62ae5806f7fb3a673f1c703a287c04712bb54f9c\npip install \"epythet==0.2.23\"\nepythet quickstart . --ignore tests/ scrap/ examples/",
+  "reproduce": "git clone https://github.com/thorwhalen/lexis && cd lexis\ngit checkout 734def60838a357f620947635740d197624cb331\npip install \"epythet==0.2.23\"\nepythet quickstart . --ignore tests/ scrap/ examples/",
   "warnings": [],
   "alignment": {
     "aligned": true,
