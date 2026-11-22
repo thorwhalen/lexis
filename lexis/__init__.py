@@ -26,6 +26,7 @@ Here we put a py2store wrapper around this stuff.
 What is WordNet? https://wordnet.princeton.edu/
 
 """
+
 import re
 
 from i2.signatures import Sig
@@ -41,10 +42,10 @@ from dol import (
 )
 
 with ModuleNotFoundErrorNiceMessage(
-    '''You don't seem to have nltk.corpus.wordnet. 
+    """You don't seem to have nltk.corpus.wordnet. 
 If you don't have nltk already, do ``pip install nltk``, and if it's that 
 you don't have wordnet downloaded, do ``import nltk; nltk.download('wordnet');``
-'''
+"""
 ):
     import nltk
     from nltk.corpus import wordnet as wn
@@ -151,8 +152,8 @@ def wordnet_element_store_base(element_cls, __module__=__name__):
 # Documentation states "These methods all return lists of Lemmas"
 lemma_methods_returning_lemmas = set(
     re.findall(
-        r'\w+',
-        '''
+        r"\w+",
+        """
     - antonyms
     - hypernyms, instance_hypernyms
     - hyponyms, instance_hyponyms
@@ -167,7 +168,7 @@ lemma_methods_returning_lemmas = set(
     - verb_groups
     - similar_tos
     - pertainyms
-''',
+""",
     )
 )
 
@@ -192,7 +193,7 @@ class KvLemma(wordnet_element_store_base(Lemma)):
         attr = super().__getitem__(k)
         if k in lemma_methods_returning_lemmas:
             return list(map(KvLemma, attr))
-        elif k == 'synset':
+        elif k == "synset":
             return KvSynset(attr)
         else:
             return attr
@@ -206,8 +207,8 @@ class KvLemma(wordnet_element_store_base(Lemma)):
 # Documentation states "These methods all return lists of Synsets"
 synset_methods_returning_synsets = set(
     re.findall(
-        r'\w+',
-        '''
+        r"\w+",
+        """
     - hypernyms, instance_hypernyms
     - hyponyms, instance_hyponyms
     - member_holonyms, substance_holonyms, part_holonyms
@@ -218,13 +219,13 @@ synset_methods_returning_synsets = set(
     - also_sees
     - verb_groups
     - similar_tos
-''',
+""",
     )
 )
 
 synset_methods_returning_list_of_lists_of_synsets = {
-    'hypernym_paths',
-    'hyponym_paths',
+    "hypernym_paths",
+    "hyponym_paths",
 }
 
 
@@ -304,9 +305,9 @@ class KvSynset(wordnet_element_store_base(Synset)):
             return list(map(KvSynset, attr))
         elif k in synset_methods_returning_list_of_lists_of_synsets:
             return [list(map(KvSynset, x)) for x in attr]
-        elif k == 'hypernym_distances':
+        elif k == "hypernym_distances":
             return {(KvSynset(ss), dist) for ss, dist in attr}
-        elif k == 'lemmas':
+        elif k == "lemmas":
             return [KvLemma(lemma) for lemma in attr]
         else:
             return attr
@@ -336,7 +337,7 @@ class Synsets(ReadOnlyMixin, Store):
         return KvSynset(self.store[k])
 
     def __repr__(self):
-        return f'{self.__class__.__name__}()'
+        return f"{self.__class__.__name__}()"
 
 
 @cached_keys(keys_cache=set)
@@ -360,9 +361,9 @@ def print_word_definitions(word):
 
 
 def word_definitions_string(word):
-    return '\n'.join(
+    return "\n".join(
         [
-            '%d: %s (%s)' % (i, x.definition(), x.name())
+            "%d: %s (%s)" % (i, x.definition(), x.name())
             for i, x in enumerate(wn.synsets(word))
         ]
     )
@@ -378,25 +379,25 @@ def print_word_lemmas(word):
 
 
 def _lemma_names_str(syn):
-    return '(' + ', '.join(syn.lemma_names) + ')'
+    return "(" + ", ".join(syn.lemma_names) + ")"
 
 
-def print_hypos_with_synset(syn, tab=''):
+def print_hypos_with_synset(syn, tab=""):
     print(tab + syn.name)
     h = syn.hyponyms()
     if len(h) > 0:
         for hi in h:
-            print_hypos_with_synset(hi, tab + '  ')
+            print_hypos_with_synset(hi, tab + "  ")
     else:
-        print(tab + '  ' + _lemma_names_str(syn))
+        print(tab + "  " + _lemma_names_str(syn))
 
 
-def pprint_hypos(syn, tab=''):
+def pprint_hypos(syn, tab=""):
     print(tab + _lemma_names_str(syn))
     h = syn.hyponyms()
     if len(h) > 0:
         for hi in h:
-            pprint_hypos(hi, tab + '  ')
+            pprint_hypos(hi, tab + "  ")
 
 
 class iTree:
@@ -412,11 +413,11 @@ class iTree:
     def tree_info_str(
         self,
         node_2_str=None,  # default info is node value
-        tab_str=2 * ' ',  # tab string
+        tab_str=2 * " ",  # tab string
         depth=0,
     ):
         node_2_str = node_2_str or self.default_node_2_str
-        s = depth * tab_str + node_2_str(self) + '\n'
+        s = depth * tab_str + node_2_str(self) + "\n"
         new_depth = depth + 1
         for child in self.children:
             s += child.tree_info_str(node_2_str, tab_str, new_depth)
@@ -430,7 +431,7 @@ class HyponymTree(iTree):
         super().__init__(value=value)
         for hypo in value.hyponyms():
             self.children.append(HyponymTree(hypo))
-        self.set_default_node_2_str('name')
+        self.set_default_node_2_str("name")
 
     def __str__(self):
         return self.value.name()
@@ -438,10 +439,10 @@ class HyponymTree(iTree):
     def __repr__(self):
         return self.value.name()
 
-    def print_lemmas(self, tab=''):
+    def print_lemmas(self, tab=""):
         print(tab + _lemma_names_str(self.value))
         for c in self.children:
-            pprint_hypos(c, tab + '  ')
+            pprint_hypos(c, tab + "  ")
 
     def leafs(self):
         return [x for x in self]
@@ -454,7 +455,7 @@ class HyponymTree(iTree):
         return tree
 
     @staticmethod
-    def get_node_2_str_function(method='name', **kwargs):
+    def get_node_2_str_function(method="name", **kwargs):
         """
         returns a node_2_str function (given it's name)
         method could be
@@ -463,39 +464,39 @@ class HyponymTree(iTree):
             * 'name_and_def': The synset name and it's definition
             * 'lemmas_and_def': The lemma names and definition
         """
-        if method == 'name':
+        if method == "name":
             return lambda node: node.value.name
-        elif method == 'lemma_names' or method == 'lemmas':
-            lemma_sep = kwargs.get('lemma_sep', ', ')
-            return lambda node: '(' + lemma_sep.join(node.value.lemma_names) + ')'
-        elif method == 'name_and_def':
-            return lambda node: node.value.name + ': ' + node.value.definition
-        elif method == 'lemmas_and_def':
-            lemma_sep = kwargs.get('lemma_sep', ', ')
-            def_sep = kwargs.get('def_sep', ': ')
-            return (
-                lambda node: '('
+        elif method == "lemma_names" or method == "lemmas":
+            lemma_sep = kwargs.get("lemma_sep", ", ")
+            return lambda node: "(" + lemma_sep.join(node.value.lemma_names) + ")"
+        elif method == "name_and_def":
+            return lambda node: node.value.name + ": " + node.value.definition
+        elif method == "lemmas_and_def":
+            lemma_sep = kwargs.get("lemma_sep", ", ")
+            def_sep = kwargs.get("def_sep", ": ")
+            return lambda node: (
+                "("
                 + lemma_sep.join(node.value.lemma_names)
-                + ')'
+                + ")"
                 + def_sep
                 + node.value.definition
             )
-        elif method == 'all':
-            lemma_sep = kwargs.get('lemma_sep', ', ')
-            def_sep = kwargs.get('def_sep', ': ')
-            return (
-                lambda node: '('
+        elif method == "all":
+            lemma_sep = kwargs.get("lemma_sep", ", ")
+            def_sep = kwargs.get("def_sep", ": ")
+            return lambda node: (
+                "("
                 + lemma_sep.join(node.value.lemma_names)
-                + ')'
+                + ")"
                 + def_sep
                 + node.value.name
                 + def_sep
                 + node.value.definition
             )
         else:
-            raise ValueError('Unknown node_2_str_function method')
+            raise ValueError("Unknown node_2_str_function method")
 
-    def set_default_node_2_str(self, method='name'):
+    def set_default_node_2_str(self, method="name"):
         """
         will set the default string representation of a synset
         (used as a default ny the tree_info_str function for example)
@@ -509,24 +510,24 @@ class HyponymTree(iTree):
         """
         self.default_node_2_str = HyponymTree.get_node_2_str_function(method)
 
-    def _df_for_excel_export(self, method='all', method_args={}):
-        method_args['def_sep'] = ':'
-        method_args['tab_str'] = method_args.get('tab_str', '* ')
-        s = ''
+    def _df_for_excel_export(self, method="all", method_args={}):
+        method_args["def_sep"] = ":"
+        method_args["tab_str"] = method_args.get("tab_str", "* ")
+        s = ""
         # s = 'lemmas' + method_args['def_sep'] + 'synset' + method_args['def_sep'] + 'definition' + '\n'
         s += self.tree_info_str(
             node_2_str=self.get_node_2_str_function(method=method),
-            tab_str=method_args['tab_str'],
+            tab_str=method_args["tab_str"],
         )
         return pd.DataFrame.from_csv(
             io.StringIO(str(s)),
-            sep=method_args['def_sep'],
+            sep=method_args["def_sep"],
             header=None,
             index_col=None,
         )
 
     def export_info_to_excel(
-        self, filepath, sheet_name='hyponyms', method='all', method_args={}
+        self, filepath, sheet_name="hyponyms", method="all", method_args={}
     ):
         d = self._df_for_excel_export(method=method, method_args=method_args)
         d.to_excel(filepath, sheet_name=sheet_name, header=False, index=False)
@@ -534,7 +535,7 @@ class HyponymTree(iTree):
 
 class HyponymForest:
     def __init__(self, tree_list):
-        assert len(tree_list) == len(set(tree_list)), 'synsets in list must be unique'
+        assert len(tree_list) == len(set(tree_list)), "synsets in list must be unique"
         for i, ss in enumerate(tree_list):
             if not isinstance(ss, HyponymTree):
                 tree_list[i] = HyponymTree(ss)
@@ -544,12 +545,15 @@ class HyponymForest:
         return {xx for x in self.tree_list for xx in x.leafs()}
 
     def export_info_to_excel(
-        self, filepath, sheet_name='hyponyms', method='all', method_args={}
+        self, filepath, sheet_name="hyponyms", method="all", method_args={}
     ):
         d = pd.DataFrame()
         for dd in self.tree_list:
             d = pd.concat(
-                [d, dd._df_for_excel_export(method=method, method_args=method_args),]
+                [
+                    d,
+                    dd._df_for_excel_export(method=method, method_args=method_args),
+                ]
             )
         d.to_excel(filepath, sheet_name=sheet_name, header=False, index=False)
 
@@ -579,7 +583,7 @@ def is_noun(word):
 
     tagged_word = nltk.pos_tag([word])
     pos = tagged_word[0][1]
-    return pos == 'NN' or pos == 'NNS'
+    return pos == "NN" or pos == "NNS"
 
 
 def is_drawable(word):
@@ -596,7 +600,7 @@ def is_drawable(word):
 
     """
     # Define a set of part-of-speech tags that correspond to physical objects
-    physical_tags = {'NN', 'NNS', 'NNP', 'NNPS', 'JJ', 'JJR', 'JJS', 'VBG'}
+    physical_tags = {"NN", "NNS", "NNP", "NNPS", "JJ", "JJR", "JJS", "VBG"}
 
     # Get the part of speech tag for the word
     tagged_word = nltk.pos_tag([word])
@@ -607,7 +611,7 @@ def is_drawable(word):
         # Check if the word is a real-world object or concept
         synsets = nltk.corpus.wordnet.synsets(word)
         for synset in synsets:
-            if synset.pos() == 'n' and not synset.lexname().startswith('verb'):
+            if synset.pos() == "n" and not synset.lexname().startswith("verb"):
                 return True
 
     # Return False if the word is not a physical entity that can be drawn
@@ -630,7 +634,7 @@ def get_singular(word: str) -> str:
     from nltk.corpus import wordnet
 
     singular = word
-    synsets = wordnet.synsets(word, pos='n')
+    synsets = wordnet.synsets(word, pos="n")
     if synsets:
         lemma = synsets[0].lemmas()[0]
         singular = lemma.name()
