@@ -1,4 +1,0 @@
-lexis
-=====
-.. automodule:: lexis
-   :members:
