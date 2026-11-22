@@ -8,7 +8,7 @@
 - [lexis](index.html.md): Wordnet wrapper - Easy access to words and their relationships
 - [API Reference](api/index.html.md): This page contains auto-generated API reference documentation &lt;sup&gt;1&lt;/sup&gt;.
 - [lexis](api/lexis/index.html.md): The key-value (i.e. dict-list) wrapper to nltk.corpus.wordnet.
-- [About this build](about-this-build.html.md): This documentation was built on &#42;&#42;2026-11-22 18:41 UTC&#42;&#42; from commit &lt;a href="https://github.com/tho...
+- [About this build](about-this-build.html.md): This documentation was built on &#42;&#42;2026-11-22 19:35 UTC&#42;&#42; from commit &lt;a href="https://github.com/tho...
 
 ## Optional
 
