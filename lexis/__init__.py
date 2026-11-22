@@ -133,7 +133,7 @@ def wordnet_element_store_base(element_cls, __module__=__name__):
                 attr = attr()
             return attr
 
-        def __repr__(self):
+        def __repr__(self) -> str:
             return f"{type(wrapped_self(self)).__name__}('{self._name}')"
 
     class WordnetElementStore(WordnetElement):
@@ -198,7 +198,7 @@ class KvLemma(wordnet_element_store_base(Lemma)):
         else:
             return attr
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         tup = type(self).__name__, self._synset._name, self._name
         return "%s('%s.%s')" % tup
 
@@ -330,13 +330,13 @@ class Synsets(ReadOnlyMixin, Store):
 
     """
 
-    def __init__(self, pos=None):
+    def __init__(self, pos=None) -> None:
         super().__init__(store={ss.name(): ss for ss in wn.all_synsets(pos=pos)})
 
     def __getitem__(self, k):
         return KvSynset(self.store[k])
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"{self.__class__.__name__}()"
 
 
@@ -356,11 +356,11 @@ import itertools
 from collections import Counter
 
 
-def print_word_definitions(word):
+def print_word_definitions(word: str) -> None:
     print(word_definitions_string(word))
 
 
-def word_definitions_string(word):
+def word_definitions_string(word: str) -> str:
     return "\n".join(
         [
             "%d: %s (%s)" % (i, x.definition(), x.name())
@@ -369,7 +369,7 @@ def word_definitions_string(word):
     )
 
 
-def print_word_lemmas(word):
+def print_word_lemmas(word: str) -> None:
     t = Counter([l.name for s in wn.synsets(word) for l in s.lemmas])
     print(
         pd.Series(index=list(t.keys()), data=list(t.values())).sort(
@@ -378,11 +378,11 @@ def print_word_lemmas(word):
     )
 
 
-def _lemma_names_str(syn):
+def _lemma_names_str(syn) -> str:
     return "(" + ", ".join(syn.lemma_names) + ")"
 
 
-def print_hypos_with_synset(syn, tab=""):
+def print_hypos_with_synset(syn, tab: str = "") -> None:
     print(tab + syn.name)
     h = syn.hyponyms()
     if len(h) > 0:
@@ -392,7 +392,7 @@ def print_hypos_with_synset(syn, tab=""):
         print(tab + "  " + _lemma_names_str(syn))
 
 
-def pprint_hypos(syn, tab=""):
+def pprint_hypos(syn, tab: str = "") -> None:
     print(tab + _lemma_names_str(syn))
     h = syn.hyponyms()
     if len(h) > 0:
@@ -401,7 +401,7 @@ def pprint_hypos(syn, tab=""):
 
 
 class iTree:
-    def __init__(self, value=None):
+    def __init__(self, value=None) -> None:
         self.value = value
         self.children = []
         self.default_node_2_str = lambda node: str(node.value)
@@ -425,7 +425,7 @@ class iTree:
 
 
 class HyponymTree(iTree):
-    def __init__(self, value=None):
+    def __init__(self, value=None) -> None:
         if isinstance(value, str):
             value = wn.synset(value)
         super().__init__(value=value)
@@ -433,10 +433,10 @@ class HyponymTree(iTree):
             self.children.append(HyponymTree(hypo))
         self.set_default_node_2_str("name")
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.value.name()
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return self.value.name()
 
     def print_lemmas(self, tab=""):
@@ -534,7 +534,7 @@ class HyponymTree(iTree):
 
 
 class HyponymForest:
-    def __init__(self, tree_list):
+    def __init__(self, tree_list) -> None:
         assert len(tree_list) == len(set(tree_list)), "synsets in list must be unique"
         for i, ss in enumerate(tree_list):
             if not isinstance(ss, HyponymTree):
