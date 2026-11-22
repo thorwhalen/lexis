@@ -638,8 +638,8 @@ swords = list(filter(lambda x: x.startswith('s') and x[1:] in lm, lm))  # one li
 
 
 ```python
-print(len(t))
-print(*t[:40], sep=', ')
+print(len(swords))
+print(*swords[:40], sep=', ')  # the order of the words may vary
 ```
 
     711
