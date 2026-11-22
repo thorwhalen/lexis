@@ -51,11 +51,6 @@ def test_hyponym_tree_from_name_and_synset(wn):
     assert leaves[-1] is t
 
 
-@pytest.mark.xfail(
-    strict=True,
-    reason="of_hyponyms appends children to a tree whose constructor already built them, "
-    "so every subtree is duplicated (and the duplication compounds with depth)",
-)
 def test_of_hyponyms_builds_the_same_shape(wn):
     syn = wn.synset("terrier.n.01")
     a, b = HyponymTree(syn), HyponymTree.of_hyponyms(syn)
@@ -84,14 +79,16 @@ def test_wordnet_helpers(wn):
     assert text.splitlines()[0].startswith("0: ") and "dog.n.01" in text
 
 
-@pytest.mark.xfail(
-    strict=True,
-    raises=TypeError,
-    reason="get_node_2_str_function was written for the old NLTK API (name, lemma_names and "
-    "definition as attributes); in current NLTK they are methods, so every method type, "
-    "and the default tree_info_str of a HyponymTree, raises",
-)
 @pytest.mark.parametrize("method", ["name", "lemma_names", "name_and_def", "lemmas_and_def", "all"])
 def test_node_2_str_methods_work_with_current_nltk(wn, method):
     t = HyponymTree("terrier.n.01")
     assert "terrier" in t.tree_info_str(HyponymTree.get_node_2_str_function(method))
+
+
+def test_df_for_excel_export_and_print_word_lemmas(wn, capsys):
+    from lexis import print_word_lemmas
+
+    df = HyponymTree("terrier.n.01")._df_for_excel_export()
+    assert len(df) > 1 and "terrier" in df.to_string()
+    print_word_lemmas("terrier")
+    assert "terrier" in capsys.readouterr().out
