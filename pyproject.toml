@@ -27,6 +27,8 @@ dependencies = [
     "i2",
     "dol>=0.3.49",
     "nltk",
+    "numpy",
+    "pandas",
 ]
 
 [project.urls]
