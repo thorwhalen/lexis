@@ -370,20 +370,20 @@ def word_definitions_string(word: str) -> str:
 
 
 def print_word_lemmas(word: str) -> None:
-    t = Counter([l.name for s in wn.synsets(word) for l in s.lemmas])
+    t = Counter([l.name() for s in wn.synsets(word) for l in s.lemmas()])
     print(
-        pd.Series(index=list(t.keys()), data=list(t.values())).sort(
-            inplace=False, ascending=False
+        pd.Series(index=list(t.keys()), data=list(t.values())).sort_values(
+            ascending=False
         )
     )
 
 
 def _lemma_names_str(syn) -> str:
-    return "(" + ", ".join(syn.lemma_names) + ")"
+    return "(" + ", ".join(syn.lemma_names()) + ")"
 
 
 def print_hypos_with_synset(syn, tab: str = "") -> None:
-    print(tab + syn.name)
+    print(tab + syn.name())
     h = syn.hyponyms()
     if len(h) > 0:
         for hi in h:
@@ -449,10 +449,8 @@ class HyponymTree(iTree):
 
     @classmethod
     def of_hyponyms(cls, syn):
-        tree = cls(syn)
-        for hypo in syn.hyponyms():
-            tree.children.append(cls.of_hyponyms(hypo))
-        return tree
+        # the constructor already builds the children recursively
+        return cls(syn)
 
     @staticmethod
     def get_node_2_str_function(method="name", **kwargs):
@@ -465,33 +463,33 @@ class HyponymTree(iTree):
             * 'lemmas_and_def': The lemma names and definition
         """
         if method == "name":
-            return lambda node: node.value.name
+            return lambda node: node.value.name()
         elif method == "lemma_names" or method == "lemmas":
             lemma_sep = kwargs.get("lemma_sep", ", ")
-            return lambda node: "(" + lemma_sep.join(node.value.lemma_names) + ")"
+            return lambda node: "(" + lemma_sep.join(node.value.lemma_names()) + ")"
         elif method == "name_and_def":
-            return lambda node: node.value.name + ": " + node.value.definition
+            return lambda node: node.value.name() + ": " + node.value.definition()
         elif method == "lemmas_and_def":
             lemma_sep = kwargs.get("lemma_sep", ", ")
             def_sep = kwargs.get("def_sep", ": ")
             return lambda node: (
                 "("
-                + lemma_sep.join(node.value.lemma_names)
+                + lemma_sep.join(node.value.lemma_names())
                 + ")"
                 + def_sep
-                + node.value.definition
+                + node.value.definition()
             )
         elif method == "all":
             lemma_sep = kwargs.get("lemma_sep", ", ")
             def_sep = kwargs.get("def_sep", ": ")
             return lambda node: (
                 "("
-                + lemma_sep.join(node.value.lemma_names)
+                + lemma_sep.join(node.value.lemma_names())
                 + ")"
                 + def_sep
-                + node.value.name
+                + node.value.name()
                 + def_sep
-                + node.value.definition
+                + node.value.definition()
             )
         else:
             raise ValueError("Unknown node_2_str_function method")
@@ -519,11 +517,9 @@ class HyponymTree(iTree):
             node_2_str=self.get_node_2_str_function(method=method),
             tab_str=method_args["tab_str"],
         )
-        return pd.DataFrame.from_csv(
-            io.StringIO(str(s)),
-            sep=method_args["def_sep"],
-            header=None,
-            index_col=None,
+        # (a definition may itself contain the separator: split into rows, not csv)
+        return pd.DataFrame(
+            [line.split(method_args["def_sep"]) for line in str(s).splitlines()]
         )
 
     def export_info_to_excel(
