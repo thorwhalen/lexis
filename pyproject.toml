@@ -109,7 +109,7 @@ project_name = "lexis"
 extras = "dev"
 
 [tool.wads.ci.commands]
-pre_test = []
+pre_test = ["python -m nltk.downloader wordnet omw-1.4"]
 test = []
 post_test = []
 lint = []
