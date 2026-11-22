@@ -1,0 +1,848 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<link rel="alternate" type="text/markdown" href="index.html.md">
+<link rel="describedby" href="llms.txt" type="text/markdown">
+<link rel="alternate" type="text/markdown" href="index.html.md">
+<link rel="describedby" href="llms.txt"><link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="API Reference" href="api/index.html">
+
+    <!-- Generated with Sphinx 9.1.1 and Furo 2025.12.19 -->
+        <title>lexis</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx_autodoc_typehints.css?v=057ac668" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f0f0f0;
+  --color-code-foreground: black;
+  --color-brand-primary: #745200;
+  --color-brand-content: #745200;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #d8b349;
+  --color-brand-content: #d8b349;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #d8b349;
+  --color-brand-content: #d8b349;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="#"><div class="brand">lexis</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="#">
+  
+  <span class="sidebar-brand-text">lexis</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api/index.html">API Reference</a><input aria-label="Toggle navigation of API Reference" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/lexis/index.html">lexis</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="_sources/index.md.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <!-- generated by epythet -->
+<section id="lexis">
+<h1>lexis<a class="headerlink" href="#lexis" title="Link to this heading">¶</a></h1>
+<p>Wordnet wrapper - Easy access to words and their relationships</p>
+<p>To install:	<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">lexis</span></code></p>
+<p>The key-value (i.e. dict-list) wrapper to nltk.corpus.wordnet.</p>
+<p>Your no fuss gateway to (English) words.</p>
+<p>The easiest way to get nltk.corpus.wordnet is</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">nltk</span></code> dependency is installed for you when installing
+<code class="docutils literal notranslate"><span class="pre">lexis</span></code>, but the wordnet data is not downloaded automatically.
+To do so (only once), go to a python console and do:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">nltk</span><span class="p">;</span> <span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">'wordnet'</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If you don’t like that way, <a class="reference external" href="https://www.nltk.org/install.html">see here</a>
+for other ways to get wordnet.</p>
+<p>The central construct of this module is the Synset
+(a set of synonyms that share a common meaning).
+To see a few things you can do with Synsets, naked,
+<a class="reference external" href="https://www.nltk.org/howto/wordnet.html">see here</a>.</p>
+<p>Here we put a py2store wrapper around this stuff.</p>
+<p>What is WordNet? https://wordnet.princeton.edu/</p>
+</section>
+<section id="a-little-peek-at-lemmas">
+<h1>A little peek at Lemmas<a class="headerlink" href="#a-little-peek-at-lemmas" title="Link to this heading">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">lexis</span><span class="w"> </span><span class="kn">import</span> <span class="n">Lemmas</span>
+
+<span class="n">lm</span> <span class="o">=</span> <span class="n">Lemmas</span><span class="p">()</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">lm</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>147306
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">lm</span></code> is a <code class="docutils literal notranslate"><span class="pre">Mapping</span></code> (think “acts like a (read-only) dict”)</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Mapping</span>
+
+<span class="nb">isinstance</span><span class="p">(</span><span class="n">lm</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+<p>Let’s have a look at a few keys</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="n">lm</span><span class="p">)[</span><span class="mi">44630</span><span class="p">:</span><span class="mi">44635</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>['blond', 'kaunda', 'peacetime', 'intolerantly', "'hood"]
+</pre></div>
+</div>
+<p>And the value of a <code class="docutils literal notranslate"><span class="pre">lm</span></code> item?</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lm</span><span class="p">[</span><span class="s1">'blond'</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>{'blond.n.01': WordnetElement('blond.n.01'),
+ 'blond.n.02': WordnetElement('blond.n.02'),
+ 'blond.a.01': WordnetElement('blond.a.01')}
+</pre></div>
+</div>
+<p>Okay, it looks like it’s different meanings of “blond”. The middle letter tells us its grammatical role it’s a noun (<code class="docutils literal notranslate"><span class="pre">n</span></code>) or an adjective (<code class="docutils literal notranslate"><span class="pre">a</span></code>). More on that later.</p>
+<p>And what’s a <code class="docutils literal notranslate"><span class="pre">WordnetElement</span></code>?</p>
+<p>Well, it’s another Mapping, apparently:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">isinstance</span><span class="p">(</span><span class="n">lm</span><span class="p">[</span><span class="s1">'blond'</span><span class="p">][</span><span class="s1">'blond.n.01'</span><span class="p">],</span> <span class="n">Mapping</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="n">lm</span><span class="p">[</span><span class="s1">'blond'</span><span class="p">][</span><span class="s1">'blond.n.01'</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>['also_sees',
+ 'instance_hypernyms',
+ 'verb_groups',
+ 'entailments',
+ 'region_domains',
+ 'substance_holonyms',
+ 'part_holonyms',
+ 'examples',
+ 'part_meronyms',
+ 'hyponyms',
+ 'member_meronyms',
+ 'offset',
+ 'causes',
+ 'definition',
+ 'lemma_names',
+ 'lexname',
+ 'member_holonyms',
+ 'in_topic_domains',
+ 'lemmas',
+ 'topic_domains',
+ 'max_depth',
+ 'hypernym_distances',
+ 'name',
+ 'attributes',
+ 'hypernyms',
+ 'min_depth',
+ 'usage_domains',
+ 'in_region_domains',
+ 'instance_hyponyms',
+ 'in_usage_domains',
+ 'similar_tos',
+ 'root_hypernyms',
+ 'pos',
+ 'frame_ids',
+ 'hypernym_paths',
+ 'substance_meronyms']
+</pre></div>
+</div>
+<p>Wow! That’s a lot of information!</p>
+<p>Let’s look at what the definition of <code class="docutils literal notranslate"><span class="pre">'blond.n.01'</span></code> is:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">lm</span><span class="p">[</span><span class="s1">'blond'</span><span class="p">][</span><span class="s1">'blond.n.01'</span><span class="p">][</span><span class="s1">'definition'</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>a person with fair skin and hair
+</pre></div>
+</div>
+<p>… actually, let’s just poke at all of them (at least those that are non-empty)</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">meaning</span> <span class="o">=</span> <span class="s1">'blond.n.01'</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Values for meaning: </span><span class="si">{</span><span class="n">meaning</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">lm</span><span class="p">[</span><span class="s1">'blond'</span><span class="p">][</span><span class="n">meaning</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">v</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"- </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Values for meaning: blond.n.01
+- hyponyms: [WordnetElement('peroxide_blond.n.01'), WordnetElement('platinum_blond.n.01'), WordnetElement('towhead.n.01')]
+- offset: 9860506
+- definition: a person with fair skin and hair
+- lemma_names: ['blond', 'blonde']
+- lexname: noun.person
+- lemmas: [KvLemma('blond.n.01.blond'), KvLemma('blond.n.01.blonde')]
+- max_depth: 7
+- hypernym_distances: {(WordnetElement('physical_entity.n.01'), 6), (WordnetElement('entity.n.01'), 7), (WordnetElement('physical_entity.n.01'), 3), (WordnetElement('entity.n.01'), 4), (WordnetElement('living_thing.n.01'), 3), (WordnetElement('object.n.01'), 5), (WordnetElement('blond.n.01'), 0), (WordnetElement('organism.n.01'), 2), (WordnetElement('causal_agent.n.01'), 2), (WordnetElement('whole.n.02'), 4), (WordnetElement('person.n.01'), 1)}
+- name: blond.n.01
+- hypernyms: [WordnetElement('person.n.01')]
+- min_depth: 4
+- root_hypernyms: [Synset('entity.n.01')]
+- pos: n
+- hypernym_paths: [[WordnetElement('entity.n.01'), WordnetElement('physical_entity.n.01'), WordnetElement('causal_agent.n.01'), WordnetElement('person.n.01'), WordnetElement('blond.n.01')], [WordnetElement('entity.n.01'), WordnetElement('physical_entity.n.01'), WordnetElement('object.n.01'), WordnetElement('whole.n.02'), WordnetElement('living_thing.n.01'), WordnetElement('organism.n.01'), WordnetElement('person.n.01'), WordnetElement('blond.n.01')]]
+</pre></div>
+</div>
+<section id="you-can-get-meaning-information-directly">
+<h2>You can get meaning information directly<a class="headerlink" href="#you-can-get-meaning-information-directly" title="Link to this heading">¶</a></h2>
+<p>What if you made a list of these strings like <code class="docutils literal notranslate"><span class="pre">'blond.n.01'</span></code>, <code class="docutils literal notranslate"><span class="pre">'blond.a.01'</span></code>… and you wanted to access the <code class="docutils literal notranslate"><span class="pre">WordnetElement</span></code> instances with all that cool information about those specifics meanings?</p>
+<p>You could do <code class="docutils literal notranslate"><span class="pre">lm['blond']['blond.n.01']</span></code>, <code class="docutils literal notranslate"><span class="pre">lm['blond']['blond.a.01']</span></code>… But then you’d have to remember the full references <code class="docutils literal notranslate"><span class="pre">('blond',</span> <span class="pre">'blond.n.01')</span></code>, <code class="docutils literal notranslate"><span class="pre">('blond',</span> <span class="pre">'blond.a.01')</span></code>…</p>
+<p>You don’t need to go through <code class="docutils literal notranslate"><span class="pre">lm['blond']</span></code> to get to the <code class="docutils literal notranslate"><span class="pre">WordnetElement</span></code> instance that gives you access to the meaning information – you can use the <code class="docutils literal notranslate"><span class="pre">Synsets</span></code> store (i.e. Mapping).</p>
+<p>Note: “synset” is what Wordnet calls this. We’ll just call is meaning for simplicity. I hope the purists won’t mind.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">lexis</span><span class="w"> </span><span class="kn">import</span> <span class="n">Synsets</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">meanings</span> <span class="o">=</span> <span class="n">Synsets</span><span class="p">()</span>
+<span class="n">meanings</span><span class="p">[</span><span class="s1">'blond.n.01'</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>WordnetElement('blond.n.01')
+</pre></div>
+</div>
+<p>We saw earlier that we had <code class="docutils literal notranslate"><span class="pre">147306</span></code> lemmas (i.e. “words” or more precisely “terms”… but really precisely, “lemmas”).</p>
+<p>Well, we have <code class="docutils literal notranslate"><span class="pre">117659</span></code> synsets (i.e. “meanings”) in the <code class="docutils literal notranslate"><span class="pre">Synsets</span></code> instance.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">meanings</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>117659
+</pre></div>
+</div>
+</section>
+<section id="multiple-lemma-names">
+<h2>Multiple lemma names<a class="headerlink" href="#multiple-lemma-names" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">'lemma_names'</span></code> are different ways that the same meaning can be written.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lm</span><span class="p">[</span><span class="s1">'blond'</span><span class="p">][</span><span class="s1">'blond.n.01'</span><span class="p">][</span><span class="s1">'lemma_names'</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>['blond', 'blonde']
+</pre></div>
+</div>
+<p>Indeed, <code class="docutils literal notranslate"><span class="pre">lm['blond']</span></code> and <code class="docutils literal notranslate"><span class="pre">lm['blonde']</span></code> really point to the same thing.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lm</span><span class="p">[</span><span class="s1">'blond'</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>{'blond.n.01': WordnetElement('blond.n.01'),
+ 'blond.n.02': WordnetElement('blond.n.02'),
+ 'blond.a.01': WordnetElement('blond.a.01')}
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lm</span><span class="p">[</span><span class="s1">'blonde'</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>{'blond.n.01': WordnetElement('blond.n.01'),
+ 'blond.n.02': WordnetElement('blond.n.02'),
+ 'blond.a.01': WordnetElement('blond.a.01')}
+</pre></div>
+</div>
+</section>
+<section id="grammatical-roles">
+<h2>Grammatical roles<a class="headerlink" href="#grammatical-roles" title="Link to this heading">¶</a></h2>
+<p>What are the different grammatical roles that are used in the meaning identifiers (aka synset keys) of our lemmas?</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">lexis</span><span class="w"> </span><span class="kn">import</span> <span class="n">Lemmas</span>
+
+<span class="n">lm</span> <span class="o">=</span> <span class="n">Lemmas</span><span class="p">()</span>
+
+<span class="n">p_middle_of_dot_path</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">'(?P&lt;first&gt;[^\.]+)\.(?P&lt;middle&gt;\w+)\.(?P&lt;last&gt;[^\.]+)'</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">extract_grammatical_role_from_meaning</span><span class="p">(</span><span class="n">meaning</span><span class="p">):</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">p_middle_of_dot_path</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">meaning</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">m</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">groupdict</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'middle'</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> 
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">meanings</span> <span class="ow">in</span> <span class="n">lm</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">meaning</span> <span class="ow">in</span> <span class="n">meanings</span><span class="p">:</span>
+        <span class="n">c</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">extract_grammatical_role_from_meaning</span><span class="p">(</span><span class="n">meaning</span><span class="p">))</span>
+        
+<span class="n">c</span><span class="o">.</span><span class="n">most_common</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[('n', 148478),
+ ('v', 42751),
+ ('s', 20895),
+ ('a', 9846),
+ ('r', 5619),
+ ('_', 29),
+ ('e', 28),
+ ('u', 17),
+ ('g', 17),
+ ('i', 15),
+ ('t', 14),
+ ('p', 8),
+ ('b', 7),
+ ('o', 7),
+ ('l', 6),
+ ('d', 4),
+ ('c', 2),
+ ('m', 1),
+ ('k', 1)]
+</pre></div>
+</div>
+</section>
+</section>
+<section id="miscellaneous-explorations">
+<h1>Miscellaneous explorations<a class="headerlink" href="#miscellaneous-explorations" title="Link to this heading">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">py2store</span><span class="w"> </span><span class="kn">import</span> <span class="n">filt_iter</span><span class="p">,</span> <span class="n">cached_keys</span><span class="p">,</span> <span class="n">add_ipython_key_completions</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">py2store</span><span class="w"> </span><span class="kn">import</span> <span class="n">kvhead</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">lexis</span><span class="w"> </span><span class="kn">import</span> <span class="n">Lemmas</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lm</span> <span class="o">=</span> <span class="n">Lemmas</span><span class="p">()</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">print_definitions</span><span class="p">(</span><span class="n">words</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"- </span><span class="si">{</span><span class="n">word</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">lm</span><span class="p">[</span><span class="n">word</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"    </span><span class="si">{</span><span class="s1">'.'</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">k</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'.'</span><span class="p">)[</span><span class="mi">1</span><span class="p">:])</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">v</span><span class="p">[</span><span class="s1">'definition'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+</pre></div>
+</div>
+<section id="find-words-containing-some-substring">
+<h2>Find words containing some substring<a class="headerlink" href="#find-words-containing-some-substring" title="Link to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">lexis</span><span class="w"> </span><span class="kn">import</span> <span class="n">print_word_definitions</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">substr</span> <span class="o">=</span> <span class="s1">'iep'</span>
+<span class="n">words</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">w</span><span class="p">:</span> <span class="n">substr</span> <span class="ow">in</span> <span class="n">w</span><span class="p">,</span> <span class="n">lm</span><span class="p">))</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>12
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">print_definitions</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- hemiepiphyte
+    n.01: a plant that is an epiphyte for part of its life
+- antiepileptic
+    n.01: a drug used to treat or prevent convulsions (as in epilepsy)
+- pieplant
+    n.01: long pinkish sour leafstalks usually eaten cooked and sweetened
+- liepaja
+    n.01: a city of southwestern Latvia on the Baltic Sea
+- semiepiphyte
+    n.01: a plant that is an epiphyte for part of its life
+- archiepiscopal
+    a.01: of or associated with an archbishop
+- tiepin
+    n.01: a pin used to hold the tie in place
+- giovanni_battista_tiepolo
+    n.01: Italian painter (1696-1770)
+- tiepolo
+    n.01: Italian painter (1696-1770)
+- antiepileptic_drug
+    n.01: a drug used to treat or prevent convulsions (as in epilepsy)
+- dnieper
+    n.01: a river that rises in Russia near Smolensk and flowing south through Belarus and Ukraine to empty into the Black Sea
+- dnieper_river
+    n.01: a river that rises in Russia near Smolensk and flowing south through Belarus and Ukraine to empty into the Black Sea
+</pre></div>
+</div>
+</section>
+<section id="find-palindrome">
+<h2>Find palindrome<a class="headerlink" href="#find-palindrome" title="Link to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">lexis</span><span class="w"> </span><span class="kn">import</span> <span class="n">Lemmas</span>
+
+<span class="n">lm</span> <span class="o">=</span> <span class="n">Lemmas</span><span class="p">()</span>
+
+<span class="n">is_palendrome_with_at_least_3_letters</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">w</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">w</span> <span class="o">==</span> <span class="n">w</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="nb">filter</span><span class="p">(</span><span class="n">is_palendrome_with_at_least_3_letters</span><span class="p">,</span> <span class="n">lm</span><span class="p">),</span> <span class="n">sep</span><span class="o">=</span><span class="s1">', '</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ono, waw, tot, kkk, ldl, anna, tenet, mom, igigi, sus, hallah, sls, pcp, mam, ofo, ene, alula, oto, civic, cfc, 101, tet, kazak, sss, ctc, aba, tevet, ara, wnw, mum, siris, tebet, tut-tut, ccc, naan, xix, tnt, peep, tut, kook, xanax, ala, eve, level, xxx, dud, aaa, dad, tdt, odo, pip, tibit, iii, sas, wow, radar, madam, yay, dmd, poop, ana, sos, bib, pop, isi, eye, gag, gig, cdc, dod, nun, pep, mym, bob, malayalam, sis, www, utu, non, ewe, aga, akka, noon, ese, rotor, ded, ppp, kayak, pap, wsw, pup, minim, nan, tat, ada, boob, mem, deed, nauruan, ma'am, succus, seles, cbc, tit, dvd, refer, toot
+</pre></div>
+</div>
+<p>Wait a minute… Where’s racecar?!? Isn’t that a palindrome?</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># </span>
+<span class="k">assert</span> <span class="s1">'racecar'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">lm</span>
+<span class="k">assert</span> <span class="s1">'race_car'</span> <span class="ow">in</span> <span class="n">lm</span>
+</pre></div>
+</div>
+<section id="which-of-these-are-or-rather-can-be-a-verb">
+<h3>Which of these are (or rather “can be”) a verb?<a class="headerlink" href="#which-of-these-are-or-rather-can-be-a-verb" title="Link to this heading">¶</a></h3>
+<p>What are the keys of the lemmas?</p>
+<p>Answer: Synset keys – that is, an id that references a unit of meaning</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># what do are the values of the lemmas?</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">lm</span><span class="p">[</span><span class="s1">'eat'</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>['eat.v.01',
+ 'eat.v.02',
+ 'feed.v.06',
+ 'eat.v.04',
+ 'consume.v.05',
+ 'corrode.v.01']
+</pre></div>
+</div>
+<p>That little <code class="docutils literal notranslate"><span class="pre">v</span></code> seems to be indicating that the meaning is… verbal?</p>
+<p>Let’s make a function to grab that middle part of the dot path and use it to make a <code class="docutils literal notranslate"><span class="pre">is_a_verb</span></code> (more like “can be a verb”).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">lexis</span><span class="w"> </span><span class="kn">import</span> <span class="n">Lemmas</span>
+
+<span class="n">lm</span> <span class="o">=</span> <span class="n">Lemmas</span><span class="p">()</span>
+
+<span class="n">p_middle_of_dot_path</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">'(?P&lt;first&gt;[^\.]+)\.(?P&lt;middle&gt;\w+)\.(?P&lt;last&gt;[^\.]+)'</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_extract_middle</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">p_middle_of_dot_path</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">m</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">groupdict</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'middle'</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> 
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    
+<span class="k">def</span><span class="w"> </span><span class="nf">grammatical_roles</span><span class="p">(</span><span class="n">lemma</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">Counter</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">_extract_middle</span><span class="p">,</span> <span class="n">lm</span><span class="p">[</span><span class="n">lemma</span><span class="p">]))</span>
+    
+
+<span class="k">assert</span> <span class="n">grammatical_roles</span><span class="p">(</span><span class="s1">'go'</span><span class="p">)</span> <span class="o">==</span> <span class="n">Counter</span><span class="p">({</span><span class="s1">'n'</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">'v'</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="s1">'a'</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>  <span class="c1"># the lemma "go" can be a verb, noun, or adjective</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">is_a_verb</span><span class="p">(</span><span class="n">lemma</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s1">'v'</span> <span class="ow">in</span> <span class="n">grammatical_roles</span><span class="p">(</span><span class="n">lemma</span><span class="p">)</span>
+    
+<span class="k">assert</span> <span class="n">is_a_verb</span><span class="p">(</span><span class="s1">'go'</span><span class="p">)</span>
+<span class="k">assert</span> <span class="ow">not</span> <span class="n">is_a_verb</span><span class="p">(</span><span class="s1">'chess'</span><span class="p">)</span>  <span class="c1"># unlike go, chess cannot be used as a verb, apparently</span>
+</pre></div>
+</div>
+<p>Palendromes that are verbs</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">is_a_verb</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="ow">and</span> <span class="n">is_palendrome_with_at_least_3_letters</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">lm</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>['tot',
+ 'tut-tut',
+ 'peep',
+ 'tut',
+ 'level',
+ 'pip',
+ 'wow',
+ 'bib',
+ 'pop',
+ 'eye',
+ 'gag',
+ 'bob',
+ 'kayak',
+ 'pup',
+ 'tat',
+ 'boob',
+ 'refer',
+ 'toot']
+</pre></div>
+</div>
+</section>
+</section>
+<section id="only-p-q-b-d-and-vowels">
+<h2>Only p, q, b, d, and vowels<a class="headerlink" href="#only-p-q-b-d-and-vowels" title="Link to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">lexis</span><span class="w"> </span><span class="kn">import</span> <span class="n">Lemmas</span>
+
+<span class="n">lm</span> <span class="o">=</span> <span class="n">Lemmas</span><span class="p">()</span>
+
+<span class="n">consonants</span> <span class="o">=</span> <span class="s1">'pqbd'</span>
+<span class="n">vowels</span> <span class="o">=</span> <span class="s1">'aeiou'</span>  <span class="c1"># 'aeiouy'</span>
+<span class="n">filt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">f</span><span class="s1">'[</span><span class="si">{</span><span class="n">vowels</span><span class="si">}{</span><span class="n">consonants</span><span class="si">}</span><span class="s1">]+$'</span><span class="p">)</span><span class="o">.</span><span class="n">match</span>  <span class="c1"># the pattern</span>
+
+<span class="n">words</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">w</span><span class="p">:</span> <span class="mi">2</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>  <span class="o">&lt;=</span> <span class="mi">7</span><span class="p">,</span> <span class="c1"># number of letters constraing</span>
+                    <span class="nb">filter</span><span class="p">(</span><span class="n">filt</span><span class="p">,</span> <span class="n">lm</span><span class="p">)))</span>  <span class="c1"># filter for iep pattern</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>249
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">words</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">'</span><span class="se">\t</span><span class="s1">'</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>bod	aaa	add	poa	pop	beaded	aqua	pib	edda	doob	boa	doi	padded	iodide	bop	edo	bide	eb	bai	quid	de	ade	daba	pid	baba	paba	bi	abb	bebop	pa	poop	pb	dea	odo	pope	dad	pup	bode	quad	bb	be	ea	epee	bid	pu	pique	iii	pod	bee	pub	ddi	id	baobab	equid	padua	pipidae	opaque	pappa	uppp	uub	qepiq	bibbed	adp	ada	pied	aoudad	qed	pupa	bedaub	bd	dba	bopeep	oboe	ado	eq	bpi	aid	bud	dodo	abo	qaeda	aa	pad	papua	baa	abode	bad	adad	adapid	papaia	db	bede	ai	po	doei	pep	eib	dubai	epi	boob	uuq	io	beep	quip	ad	babu	ded	ia	dud	da	qi	paid	peep	doodad	beda	eddo	boo	padda	ipidae	deep	dope	ied	doped	dopa	ii	iaea	uda	dd	baud	dido	ebb	epa	bodied	pap	ed	peba	bed	audio	deed	idea	apoidea	beau	up	pda	iud	ip	diode	bida	pi	apidae	bead	odd	od	dia	baddie	iaa	ape	ipo	dod	idp	ee	ie	daub	duo	boidae	poe	abed	adobe	pea	dude	do	aided	obi	ido	pipe	pe	doe	aiai	pd	baboo	quipu	pood	papio	equidae	iop	qadi	ab	dado	dub	adobo	bap	pei	baeda	equip	dupe	aqaba	bob	ba	dead	dada	adapa	pee	opepe	pob	iou	duad	doodia	dab	aide	pip	dipped	bubo	pipa	poi	apia	ode	upupa	iq	aba	abbe	edp	edd	pia	due	pud	ob	audad	dp	deb	pie	oed	die	ppp	queue	papa	adieu	biped	babe	ida	dubuque	dip	uup	eu	ipod	bade	au	abide	bib	bedded
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">print_definitions</span><span class="p">([</span><span class="s1">'adapa'</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- adapa
+    n.01: a Babylonian demigod or first man (sometimes identified with Adam)
+</pre></div>
+</div>
+<section id="containing-i-e-p-in-that-order-with-other-letters-in-between">
+<h3>Containing i, e, p in that order, with other letters in between<a class="headerlink" href="#containing-i-e-p-in-that-order-with-other-letters-in-between" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">filt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">'\w{0,2}i\w{0,2}e\w{0,2}p\w{0,2}$'</span><span class="p">)</span><span class="o">.</span><span class="n">match</span>  <span class="c1"># The *i*e*p* pattern</span>
+
+<span class="n">words</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">w</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">6</span><span class="p">,</span> <span class="c1"># no more than 6 letters</span>
+                    <span class="nb">filter</span><span class="p">(</span><span class="n">filt</span><span class="p">,</span> <span class="n">lm</span><span class="p">)))</span>  <span class="c1"># filter for iep pattern</span>
+<span class="n">print_definitions</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>9
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">words</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">', '</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>tie_up, ginep, lineup, inept, pileup, tiepin, biceps, icecap, ice_up
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">print_definitions</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- tie_up
+    v.01: secure with or as if with ropes
+    v.02: invest so as to make unavailable for other purposes
+    v.03: restrain from moving or operating normally
+    v.01: secure in or as if in a berth or dock
+    v.05: finish the last row
+- ginep
+    n.01: tropical American tree bearing a small edible fruit with green leathery skin and sweet juicy translucent pulp
+- lineup
+    n.01: (baseball) a list of batters in the order in which they will bat
+    n.02: a line of persons arranged by police for inspection or identification
+- inept
+    s.04: not elegant or graceful in expression
+    s.02: generally incompetent and ineffectual
+    s.03: revealing lack of perceptiveness or judgment or finesse
+- pileup
+    n.01: multiple collisions of vehicles
+- tiepin
+    n.01: a pin used to hold the tie in place
+- biceps
+    n.01: any skeletal muscle having two origins (but especially the muscle that flexes the forearm)
+- icecap
+    n.01: a mass of ice and snow that permanently covers a large area of land (e.g., the polar regions or a mountain peak)
+- ice_up
+    v.01: become covered with a layer of ice; of a surface such as a window
+</pre></div>
+</div>
+</section>
+</section>
+<section id="s-words">
+<h2>S-words<a class="headerlink" href="#s-words" title="Link to this heading">¶</a></h2>
+<p>Words that start with <code class="docutils literal notranslate"><span class="pre">s</span></code> but if you remove <code class="docutils literal notranslate"><span class="pre">s</span></code>, it’s still a word.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">lexis</span><span class="w"> </span><span class="kn">import</span> <span class="n">Lemmas</span>  <span class="c1"># pip install py2store</span>
+<span class="n">lm</span> <span class="o">=</span> <span class="n">Lemmas</span><span class="p">()</span>
+<span class="n">swords</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">'s'</span><span class="p">)</span> <span class="ow">and</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="ow">in</span> <span class="n">lm</span><span class="p">,</span> <span class="n">lm</span><span class="p">))</span>  <span class="c1"># one line!</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">t</span><span class="p">[:</span><span class="mi">40</span><span class="p">],</span> <span class="n">sep</span><span class="o">=</span><span class="s1">', '</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>711
+softener, spock, scent, spark, sbe, stickweed, screaky, salt, salp, sec, strap, sliver, slack, swish, sebs, sarawak, scuttle, stripping, swell, stole, spine, space, scar, sass, sewer, spitting, serving, sew, stalk, smite, sniffy, stripe, slake, stone, slit, sea, shoe, sweeper, swear_off, swan
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">py2store</span><span class="w"> </span><span class="kn">import</span> <span class="n">filt_iter</span><span class="p">,</span> <span class="n">wrap_kvs</span><span class="p">,</span> <span class="n">KvReader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">lexis</span><span class="w"> </span><span class="kn">import</span> <span class="n">Lemmas</span>  <span class="c1"># pip install py2store</span>
+<span class="n">lm</span> <span class="o">=</span> <span class="n">Lemmas</span><span class="p">()</span>
+
+<span class="nd">@filt_iter</span><span class="p">(</span><span class="n">filt</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">'s'</span><span class="p">)</span> <span class="ow">and</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="ow">in</span> <span class="n">lm</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Swords</span><span class="p">(</span><span class="n">Lemmas</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">kk</span><span class="p">,</span> <span class="n">vv</span> <span class="ow">in</span> <span class="n">v</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">yield</span> <span class="sa">f</span><span class="s2">"    </span><span class="si">{</span><span class="s1">'.'</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">kk</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'.'</span><span class="p">)[</span><span class="mi">1</span><span class="p">:])</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">vv</span><span class="p">[</span><span class="s1">'definition'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span>
+            
+<span class="n">s</span> <span class="o">=</span> <span class="n">Swords</span><span class="p">()</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>711
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>['    n.01: a substance added to another to make it less hard']
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">islice</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">islice</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="mi">5</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"------------ </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2"> -------------"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">v</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>------------ softener -------------
+    n.01: a substance added to another to make it less hard
+------------ spock -------------
+    n.01: United States pediatrician whose many books on child care influenced the upbringing of children around the world (1903-1998)
+------------ scent -------------
+    n.02: a distinctive odor that is pleasant
+    n.02: an odor left in passing by which a person or animal can be traced
+    n.01: any property detected by the olfactory system
+    v.01: cause to smell or be smelly
+    v.02: catch the scent of; get wind of
+    v.02: apply perfume to
+------------ spark -------------
+    n.01: a momentary flash of light
+    n.01: merriment expressed by a brightness or gleam or animation of countenance
+    n.05: electrical conduction through a gas in an applied electric field
+    n.04: a small but noticeable trace of some quality that might become stronger
+    n.05: Scottish writer of satirical novels (born in 1918)
+    n.06: a small fragment of a burning substance thrown out by burning material or by friction
+    v.04: put in motion or move to act
+    v.02: emit or produce sparks
+------------ sbe -------------
+    n.01: the compass point that is one point east of due south
+</pre></div>
+</div>
+<p class="epythet-aggregates">This documentation as a single file: <a href="lexis.md">lexis.md</a> (Markdown, for agents).</p>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+</section>
+
+<p class="epythet-provenance" style="font-size:.8em;opacity:.65;margin-top:2.5em;text-align:right">built 2026-11-22 18:41 UTC from <a href="https://github.com/thorwhalen/lexis/commit/14f8370a366bdfd4873a3b2c7c7c031739e866c5">14f8370</a> (master) · lexis 0.1.3 · <a href="about-this-build.html">about this build</a></p>
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="api/index.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">API Reference</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            Made with 
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=1807f793"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=fd10adb8"></script>
+    </body>
+</html>

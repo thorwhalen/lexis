@@ -1,0 +1,12 @@
+# lexis
+
+> Wordnet wrapper - Easy access to words and their relationships
+
+
+## Pages in this subsection
+
+- [lexis](index.html.md): The key-value (i.e. dict-list) wrapper to nltk.corpus.wordnet.
+
+## Optional
+
+- [Top-level llms.txt](../../llms.txt): Complete documentation index.
